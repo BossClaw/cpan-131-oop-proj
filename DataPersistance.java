@@ -67,20 +67,22 @@ public class DataPersistance {
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
             // WRITE HEADER
-            bw.write("Title,Platform,Genre,ReleaseYear,OwnershipStatus");
+            bw.write("Id,Title,Year,isOwned,Tags,Price");
             bw.newLine();
 
             // LOOP THROUGH EACH GAME OBJ
             for (Game game : games) {
 
                 // CREATE THE LINE WITH VALS
-                String line = String.format("%s,%s,%i,%s,%d,%s",
+                String line = String.format("%s,%s,%d,%s,%s,%.2f",
                         game.getId(),
                         game.getTitle(),
                         game.getYear(),
-                        game.getPrice(),
-                        game.getIsOwned(),
-                        game.getTags());
+                        game.getIsOwned() ? "Y" : "N",
+                        // COLLAPSE TAGS TO STRING
+                        String.join("|", game.getTags()),
+                        // PRICE
+                        game.getPrice());
 
                 bw.write(line);
                 bw.newLine();
