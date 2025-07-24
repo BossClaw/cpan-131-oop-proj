@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Library {
 
-    // DEPENDENCIES
+    // PERSISTENT CLASS DEPENDENCY
     private final DataPersistance _data;
 
     // GAMES LIST & GETTER
@@ -26,7 +26,7 @@ public class Library {
 
         // CHECK FOR .CSV AND LOAD IF AVAIL
         if (_data.hasCsv()) {
-            this.games = _data.loadGamesFromCsv();
+            load_games_from_disc();
         }
     }
 
@@ -56,8 +56,8 @@ public class Library {
         // ADD NEWGAME TO LIBRARY LIST IN MEMORY
         this.games.add(newGame);
 
-        // SAVE THE CHANGED LIBRARY LIST TO DISK
-        _data.saveGamesToCsv();
+        // SAVE TO DISK USING INJECTED CLASS
+        _data.saveGamesToCsv(this.games);
 
         // OUTPUT TO CONSOLE
         System.out.println("Game \"" + newGame.getTitle() + "\" added to the library.");
@@ -70,8 +70,8 @@ public class Library {
 
         // FIND THE EXISTING GAME ID
         // UPDATE
-        // SAVE TO DISK
-        _data.saveGamesToCsv();
+        // SAVE TO DISK USING INJECTED CLASS
+        _data.saveGamesToCsv(this.games);
 
         // System.out.println("Game \"" + game.getTitle() + "\" updated the library.");
     }
@@ -84,9 +84,30 @@ public class Library {
         // FIND THE EXISTING GAME ID
         // var game = games.find
         // DELETE
-        // SAVE TO DISK
-        _data.saveGamesToCsv();
+        // SAVE TO DISK USING INJECTED CLASS
+        save_games_to_disc();
 
         // System.out.println("Game \"" + game.getTitle() + "\" delete from library.");
-    }    
+    }
+
+    // ================================================================================
+    // LOADING / SAVING
+    // DEDICATED FUNCS EASIER TO USE, INTELLISENSE, ALLOWS LOGIC CHANGE IN ONE PLACE
+    public void load_games_from_disc() {
+        this.games = _data.loadGamesFromCsv();
+
+        // DEBUG - DUMP LIST OF GAMES
+        System.out.println("LOADED GAMES (" + this.games.size() + ")");
+
+        // ALL OF THEM
+        for (Game game : this.games) {
+            System.out.println("  " + game);
+        }
+    }
+
+    public void save_games_to_disc() {
+        _data.saveGamesToCsv(this.games);
+    }
+
+    // END OF CLASS
 }

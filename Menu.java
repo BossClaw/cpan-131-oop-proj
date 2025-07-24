@@ -10,14 +10,9 @@ public class Menu {
     private final FilterLogic filter;
 
     // USED BY MENU METHODS
-    private final Scanner scanner;    
+    private final Scanner scanner;
 
-    /**
-     * Constructor for Menu class. Using dependency injection to pass the
-     * Library instance.
-     *
-     * @param library Library instance to manage video games
-     */
+    // CONSTRUCTOR REQUIRING CLASS DEPENDENCIES
     public Menu(Scanner _scanner, Library _library, FilterLogic _filter) {
         this.library = _library;
         this.scanner = _scanner;
@@ -32,7 +27,7 @@ public class Menu {
         // MAIN MENU LOOP UNTIL USER CHOOSES TO EXIT
         do {
             // CLEAR SCREEN
-            clearScreen();
+            //clearScreen();
 
             // DISPLAY MENU OPTIONS
             System.out.println("\n--- Video Game Library Menu ---");

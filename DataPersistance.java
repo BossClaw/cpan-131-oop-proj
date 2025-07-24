@@ -1,28 +1,96 @@
+import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DataPersistance {
+
     // DARRYL LECRAW
+    private final String filePath = "video_games.csv";
 
     public boolean hasCsv() {
-
-        return false;
+        File file = new File(filePath);
+        return file.exists() && file.isFile();
     }
 
     public ArrayList<Game> loadGamesFromCsv() {
+        // MAKE A FRESH ARRAY TO RETURN
+        ArrayList<Game> return_games_array = new ArrayList<>();
 
-        // !!!! - CAN BE A JSON
-        //
-        
-        var retArr = new ArrayList<Game>();
+        // ATTEMPT. USE TRY TO CATCH AND GRACEFULLY HANDLE ERRORS
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            boolean isFirstLine = true;
 
-        return retArr;
+            while ((line = br.readLine()) != null) {
+                // SKIP HEADER
+                if (isFirstLine) {
+                    isFirstLine = false;
+                    continue;
+                }
+
+                // SPLIT BY COMMA CHAR
+                String[] parts = line.split(",");
+
+                // ONLY ACCEPT MATCHING
+                // NOTE - WE COULD MAKE THIS 'SMART', BUT ONLY IF TIME ALLOWS
+                if (parts.length == 5) {
+                    // GET THE VALS, CASTING AS NEEDED
+                    // UID,Name,Year,Developer,Owned,Completion,Rating,Tags
+                    int uid = Integer.parseInt(parts[0].trim());
+                    String name = parts[0].trim();
+                    int year = Integer.parseInt(parts[3].trim());
+                    int developer = Integer.parseInt(parts[3].trim());
+                    String owned = parts[4].trim();
+                    String completion = parts[4].trim();
+                    String rating = parts[4].trim();
+                    String platform = parts[1].trim();
+                    String genre = parts[2].trim();
+                    String tags = parts[2].trim();
+
+                    // CREATE THE GAME OBJ
+                    Game game = new Game(title, platform, genre, releaseYear, ownershipStatus);
+
+                    // ADD TO THE RETURN ARRAY
+                    return_games_array.add(game);
+                }
+            }
+
+        } catch (IOException | NumberFormatException e) {
+            // TODO - HANDLE ERROR GRACEFULLY
+            e.printStackTrace();
+        }
+
+        // RETURN THE ARRAY
+        return return_games_array;
     }
 
-    public boolean saveGamesToCsv() {
+    public boolean saveGamesToCsv(List<Game> games) {
+        boolean saveSuccess = true;
 
-        // LOGIC
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+            // WRITE HEADER
+            bw.write("Title,Platform,Genre,ReleaseYear,OwnershipStatus");
+            bw.newLine();
 
-        var saveSuccess = true;
+            // LOOP THROUGH EACH GAME OBJ
+            for (Game game : games) {
+
+                // CREATE THE LINE WITH VALS
+                String line = String.format("%s,%s,%s,%d,%s",
+                        game.getTitle(),
+                        game.getPlatform(),
+                        game.getGenre(),
+                        game.getReleaseYear(),
+                        game.getOwnershipStatus());
+
+                bw.write(line);
+                bw.newLine();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            saveSuccess = false;
+        }
 
         return saveSuccess;
     }

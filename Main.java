@@ -5,8 +5,6 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        // SETUP SCANNER
-
         // CREATE PROJ CLASSES FOR DEPENDENCY INJECTION
         DataPersistance dataPersistance = new DataPersistance();
 
@@ -14,19 +12,16 @@ public class Main {
         Library library = new Library(dataPersistance);
         FilterLogic filterLogic = new FilterLogic(library);
 
-        // CREATE MENU AND RUN
-        try (
-                // CREATE SCANNER FOR USER INPUT
-                Scanner scanner = new Scanner(System.in)) {
+        // CREATE SCANNER FOR USER INPUT
+        Scanner scanner = new Scanner(System.in);
 
-            // CREATE MENU AND RUN
-            Menu menu = new Menu(scanner, library, filterLogic);
-            menu.displayMenu();
-        } catch (Exception e) {
-            System.out.println("An error occurred: " + e.getMessage());
-        } finally {
+        // CREATE MENU
+        Menu menu = new Menu(scanner, library, filterLogic);
 
-            System.out.println("Thank you for using the library system!");
-        }
+        // RUN IT
+        menu.displayMenu();
+
+        // DISPOSE SCANNER
+        scanner.close();;
     }
 }
