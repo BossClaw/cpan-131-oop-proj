@@ -29,6 +29,7 @@ Id,Title,Year,isOwned,Tags,Price
 "0028","Neon Blitz 2",2013,N,"Pixel Art|Shooter",9.99
 "0029","Knightfall 3",1990,Y,"Singleplayer|Open World|Puzzle",7.49
 "0030","Alien Harvest 3",2012,N,"Puzzle|Retro",8.99
+"2011","The Legend of Zelda: Breath of the Wild",2017,N,"Action-Adventure|Open-World|Fantasy|Nintendo Switch",59.99
 "2012","Cyberpunk 2077",2020,Y,"RPG|Sci-Fi|Open-World|Futuristic|Mature",39.99
 "2013","Hades",2020,Y,"Roguelike|Action|Indie|Greek Mythology|Isometric",19.99
 "2014","Minecraft",2011,N,"Sandbox|Creative|urvival|Multiplayer|Family-Friendly",26.95
@@ -68,4 +69,3 @@ Id,Title,Year,isOwned,Tags,Price
 "g008","Stardew Valley",2017,Y,"Farming|Indie|Relaxing",14.99
 "g009","Call of Duty",2005,Y,"Shooter|Action|Multiplayer",19.99
 "g010","Hollow Knight",2016,N,"Metroidvania|Indie",14.99
-002,Doki Doki Panic,1980,Y,platformer, action,19.99

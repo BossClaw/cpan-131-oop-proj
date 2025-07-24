@@ -1,3 +1,4 @@
+// Kuo Yu Lu
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class GameFilter {
 
-    private Library library;
+    private Library liberary;
     private final String color = "CYAN";
     private final String innerColor = "blue";
     private final String[] options = {
@@ -22,12 +23,12 @@ public class GameFilter {
         "Exit"
     };
 
-    public GameFilter(Library library) {
-        this.library = library;
+    public GameFilter(Library liberary) {
+        this.liberary = liberary;
     }
 
     // Print main menu
-    public void menu() {
+    public void menu(Scanner scan) {
         Print.header("Game Filter Menu", color);
 
         for (int i = 0; i < options.length; i++) {
@@ -43,12 +44,11 @@ public class GameFilter {
         }
 
         Print.line("", Print.defaultWidth, Print.defaultPaddingSign, color);
-        menuInput();
+        menuInput(scan);
     }
 
     // Get menu input
-    public void menuInput() {
-        Scanner scan = new Scanner(System.in);
+    public void menuInput(Scanner scan) {
         boolean isContinue = true;
 
         while (true) {
@@ -103,7 +103,6 @@ public class GameFilter {
             }
 
             if (!isContinue) {
-                scan.close();
                 return;
             }
         }
@@ -121,7 +120,7 @@ public class GameFilter {
         }
 
         // Find games
-        List<Game> games = new ArrayList<>(library.getAllGames());
+        List<Game> games = new ArrayList<>(liberary.getAllGames());
         List<Game> filteredGames = games.stream()
                 .filter(game -> game.getTitle().toLowerCase().contains(input.toLowerCase()))
                 .collect(Collectors.toList());
@@ -135,7 +134,7 @@ public class GameFilter {
 
     // Find by tags
     public void findByTag(Scanner scan) {
-        List<Game> games = new ArrayList<>(library.getAllGames());
+        List<Game> games = new ArrayList<>(liberary.getAllGames());
 
         // Get all tags
         Set<String> displayTagsSet = new HashSet<>();
@@ -189,7 +188,7 @@ public class GameFilter {
 
     // Find by owned
     public void findByOwnGame(Scanner scan) {
-        List<Game> games = new ArrayList<>(library.getAllGames());
+        List<Game> games = new ArrayList<>(liberary.getAllGames());
 
         // Ask user
         System.out.print(Color.colorize(innerColor, "> [Find By Owned] Enter T / F (0 to exit): "));
@@ -216,7 +215,7 @@ public class GameFilter {
 
     // Find by price
     public void findByPrice(Scanner scan) {
-        List<Game> games = new ArrayList<>(library.getAllGames());
+        List<Game> games = new ArrayList<>(liberary.getAllGames());
 
         // Ask for operator
         System.out
@@ -264,10 +263,11 @@ public class GameFilter {
 
     // Sort By
     public void sort(Scanner scan) {
-        List<Game> games = new ArrayList<>(library.getAllGames());
+        List<Game> games = new ArrayList<>(liberary.getAllGames());
 
         // Ask input sort by option
-        System.out.print(Color.colorize(innerColor, "> [Sort] Enter sort field (id, title, price, owned or 0 to exit): "));
+        System.out
+                .print(Color.colorize(innerColor, "> [Sort] Enter sort field (id, title, price, year, owned or 0 to exit): "));
         scan.nextLine(); // consume newline
         String sortBy = scan.nextLine().trim();
 
@@ -277,9 +277,9 @@ public class GameFilter {
         }
 
         // check for sortBy
-        List<String> sortByOptions = List.of("id", "title", "price", "owned");
+        List<String> sortByOptions = List.of("id", "title", "price", "year", "owned");
         if (!sortByOptions.contains(sortBy.toLowerCase())) {
-            System.out.println(Color.red("❌ Please enter a valid sort by field (id, title, price, owned)"));
+            System.out.println(Color.red("❌ Please enter a valid sort by field (id, title, price, year, owned)"));
             return;
         }
 
@@ -305,7 +305,6 @@ public class GameFilter {
         if (!order.equals("d") && !order.equals("a")) {
             order = "a"; // default to ascending order
         }
-
         String sortByString = sortBy + "-" + order;
 
         switch (sortByString) {
@@ -326,6 +325,12 @@ public class GameFilter {
                 break;
             case "price-d":
                 games.sort(Comparator.comparing(Game::getPrice).reversed());
+                break;
+            case "year-a":
+                games.sort(Comparator.comparing(Game::getYear));
+                break;
+            case "year-d":
+                games.sort(Comparator.comparing(Game::getYear).reversed());
                 break;
             case "owned-a":
                 games.sort(Comparator.comparing(Game::getIsOwned));

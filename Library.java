@@ -11,10 +11,6 @@ public class Library {
     // GAMES LIST & GETTER
     private List<Game> games;
 
-    public List<Game> GetGames() {
-        return games;
-    }
-
     // DEPENDANCY INJECTION
     public Library(DataPersistance data) {
 
@@ -26,16 +22,13 @@ public class Library {
 
         // CHECK FOR .CSV AND LOAD IF AVAIL
         if (_data.hasCsv()) {
-            load_games_from_disc();
+            loadGamesFromDisc();
         }
     }
 
-    public void add(Game game) {
-        this.games.add(game);
-    }
-
+    // LU'S CODE
     public void removeById(String id) {
-
+// LU
         boolean isRemoved = this.games.removeIf(game -> game.getId().equals(id));
 
         if (!isRemoved) {
@@ -43,11 +36,18 @@ public class Library {
         }
     }
 
+    public List<Game> GetGames() {
+        // LU
+        return games;
+    }
+
     public List<Game> getAllGames() {
+        // LU? 
         return this.games;
     }
 
     public void printAllGames() {
+        // LU
         int count = 1;
 
         for (Game game : this.games) {
@@ -58,35 +58,32 @@ public class Library {
 
     // ========================================================================
     // CREATE
-    public void addGame(String title, String platform, String genre, int releaseYear, String ownership) {
-
-        // V2DO - OWNERSHIP SHORTFORM (O)wned, (W)ishlisted
-        // TODO - EVAL WHY CODE SUGGEST USES REVERSE AND EQUALS FOR STRING COMPARISON
-        var ownershipFull = ownership;
-        if ("O".equals(ownershipFull.toUpperCase())) {
-            ownershipFull = "Owned";
-        }
-        if ("W".equals(ownershipFull.toUpperCase())) {
-            ownershipFull = "Wishlisted";
-        }
-
-        // CREATE NEW GAME OBJ
+    // OVERRIDE!!!!
+    public String addGame(String id, String title, int year, boolean owned, List<String> tags, Double price) {
+        // CREATE NEW GAME OBJ AND ADD        
         Game newGame = new Game(
+                id,
                 title,
-                platform,
-                genre,
-                releaseYear,
-                ownershipFull
+                year,
+                owned,
+                tags,
+                price
         );
 
+        return addGame(newGame);
+    }
+
+    public String addGame(Game newGame) {
+
+        // TODO - TRY / CATCH TO ERROR GRACEFULLY
         // ADD NEWGAME TO LIBRARY LIST IN MEMORY
         this.games.add(newGame);
 
         // SAVE TO DISK USING INJECTED CLASS
         _data.saveGamesToCsv(this.games);
 
-        // OUTPUT TO CONSOLE
-        System.out.println("Game \"" + newGame.getTitle() + "\" added to the library.");
+        // RETURN MESG
+        return "Game \"" + newGame.getTitle() + "\" added to the library.";
     }
 
     // =================================================================
@@ -119,16 +116,16 @@ public class Library {
     // ================================================================================
     // LOADING / SAVING
     // DEDICATED FUNCS EASIER TO USE, INTELLISENSE, ALLOWS LOGIC CHANGE IN ONE PLACE
-    public void load_games_from_disc() {
+    public void loadGamesFromDisc() {
         this.games = _data.loadGamesFromCsv();
 
         // DEBUG - DUMP LIST OF GAMES
-        System.out.println("LOADED GAMES (" + this.games.size() + ")");
+        System.out.println("[LIBARY] LOADED GAMES (" + this.games.size() + ")");
 
         // ALL OF THEM
-        for (Game game : this.games) {
-            System.out.println("  " + game);
-        }
+        //for (Game game : this.games) {
+        //System.out.println("  " + game);
+        //}        
     }
 
     public void save_games_to_disc() {

@@ -7,17 +7,19 @@ public class Game {
     private String id;
     private String title;
     private int year;
-    private double price;
     private boolean isOwned;
     private List<String> tags;
+    private double price;
 
-    public Game(String id, String title, int year, double price, Boolean isOwned, List<String> tags) {
+    public Game(String id, String title, int year, Boolean isOwned, List<String> tags, double price) {
+
+        // System.out.println("[GAME] MAKING A NEW GAME WITH[" + id + "][" + title + "][" + year + "][" + isOwned + "][" + price + "][" + tags + "]");
         this.id = id;
         this.title = title;
         this.year = year;
-        this.price = price;
         this.isOwned = (isOwned != null) ? isOwned : false;
         this.tags = tags;
+        this.price = price;
     }
 
     public String getId() {
@@ -47,7 +49,6 @@ public class Game {
     // ===================================================================================
     // PROB USELESS
     @Override
-
     public String toString() {
         return "Title: " + title + ", Price: " + price + ", IsOwned: " + isOwned
                 + ", Tags: " + tags.toString();

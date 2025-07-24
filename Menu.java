@@ -1,5 +1,7 @@
 // EVERYONE
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
@@ -7,18 +9,21 @@ public class Menu {
     // HANDLES ALL THE USER INPUT AND MENU LOGIC
     // DEPENDENCY INJECTION CLASSES
     private final Library library;
-    private final FilterLogic filter;
+    private final GameFilter filter;
 
     // USED BY MENU METHODS
     private Scanner scanner;
 
     // CONSTRUCTOR REQUIRING CLASS DEPENDENCIES
-    public Menu(Library _library, FilterLogic _filter) {
+    public Menu(Library _library, GameFilter _filter) {
         this.library = _library;
         this.filter = _filter;
     }
 
     public void displayMenu() {
+
+        // CLEAR SCREEN
+        clearScreen();
 
         // MAKE THE SCANNER                
         scanner = new Scanner(System.in);
@@ -28,23 +33,20 @@ public class Menu {
 
         // MAIN MENU LOOP UNTIL USER CHOOSES TO EXIT
         do {
-            // CLEAR SCREEN
-            //clearScreen();
 
             // DISPLAY MENU OPTIONS
             System.out.println("\n--- Video Game Library Menu ---");
-            System.out.println("1. Add New Game");
-            System.out.println("2. Add Game (Shorthand)");
+            System.out.println("1. List All Games");
+            System.out.println("2. Add New Game");
             System.out.println("3. Edit Game (MILESTONE 2)");
             System.out.println("4. Delete Game (MILESTONE 2)");
 
-            System.out.println("10. View All Games");
-            System.out.println("11. Report");
+            System.out.println("10. Filter");
+            System.out.println("11. Report (MILESTONE 2)");
 
             System.out.println("50. Bulk Import Games from CSV (MILESTONE 2)");
 
             System.out.println("77. Exit");
-            System.out.println("999. SCREW UP");
 
             // PROMPT USER FOR CHOICE AS INT
             System.out.print("Enter your choice: ");
@@ -57,21 +59,27 @@ public class Menu {
             switch (choice) {
                 // GAME CUD
                 case 1:
-                    addNewGame();
+                    // LIST GAMES
+                    Print.gameList(library.getAllGames(), "All Games", true, "blue");
                     break;
                 case 2:
-                    addGameShorthand();
+                    addNewGame();
+                    // MILESTONE 2 editGameShorthand();
                     break;
                 case 3:
-                    // MILESTONE 2 editGameShorthand();
+                    // MILESTONE 2
+                    //editGame();
                     break;
 
                 // GAME RETRIEVAL/FILTER/REPORTS
                 case 10:
                     // TBD - BEST WAY TO DO THIS
                     // BLANK FILTER LISTS ALL
-                    filter.listGamesByFilter("");
-                    promptEnterKey();
+
+                    // LU - 
+                    // filter.listGamesByFilter("");
+                    filter.menu(scanner);
+                    // promptEnterKey();
                     break;
                 case 11:
                     // USER INPUT FILTER
@@ -119,37 +127,61 @@ public class Menu {
      * Adds a new game to the library by prompting the user for details.
      */
     private void addNewGame() {
+
+        System.out.print("Enter game id: ");
+        String id = scanner.nextLine();
+        System.out.println("GOT ID[" + id + "]\n\n");
+
         System.out.print("Enter game title: ");
         String title = scanner.nextLine();
         System.out.println("GOT TITLE[" + title + "]\n\n");
 
         System.out.print("Enter release year: ");
-        int releaseYear = scanner.nextInt();
+        int year = scanner.nextInt();
         scanner.nextLine(); // CONSUME NEWLINE AFTER ALL INTS
-        System.out.println("GOT YEAR[" + releaseYear + "]\n\n");
+        System.out.println("GOT YEAR[" + year + "]\n\n");
 
-        System.out.print("Enter genre: ");
-        String genre = scanner.nextLine();
-        System.out.println("GOT GENRE[" + genre + "]\n\n");
+        System.out.print("Owned (Y/N): ");
+        String owned_str = scanner.nextLine();
+        System.out.println("GOT OWNED_STR[" + owned_str + "]\n\n");
 
-        System.out.print("Enter platform (PC, PlayStation, Xbox, Switch): ");
-        String platform = scanner.nextLine();
-        System.out.println("GOT PLATFORM[" + platform + "]\n\n");
+        // NOTE - CLARANCE DON'T DELETE
+        // System.out.print("Enter genre: ");
+        // String genre = scanner.nextLine();
+        // System.out.println("GOT GENRE[" + genre + "]\n\n");
+        // System.out.print("Enter platform (PC, PlayStation, Xbox, Switch): ");
+        // String platform = scanner.nextLine();
+        // System.out.println("GOT PLATFORM[" + platform + "]\n\n");
+        // System.out.print("Enter ownership status ((O)wned, (W)ishlisted): ");
+        // String ownership = scanner.nextLine();
+        // System.out.println("GOT OWNERSHIP[" + ownership + "]\n\n");
+        // PRICE
+        System.out.print("Enter price $: ");
+        double price = scanner.nextDouble();
+        scanner.nextLine();
+        System.out.println("GOT PRICE[" + price + "]\n\n");
 
-        System.out.print("Enter ownership status ((O)wned, (W)ishlisted): ");
-        String ownership = scanner.nextLine();
-        System.out.println("GOT OWNERSHIP[" + ownership + "]\n\n");
+        // TAG SEPARATED STRING
+        System.out.print("Enter comma separated tags: ");
+        String tag_str = scanner.nextLine();
+        System.out.println("GOT TAG STR[" + tag_str + "]\n\n");
+
+        // NOW PREP THE DATA FOR ADDING NEW GAME
+        // NOTE - MAKE A UTIL TO NOT DUPLICATE CODE SO MUCH
+        var tag_list = new ArrayList<>(List.of(tag_str.trim().split("\\|")));
+        var isOwned = "Y".equals(owned_str);
 
         // PASS THE INPUT VARS TO LIBRARY ADDGAME METHOD
-        library.addGame(
+        String addResult = library.addGame(
+                id,
                 title,
-                platform,
-                genre,
-                releaseYear,
-                ownership);
+                year,
+                isOwned,
+                tag_list,
+                price);
 
-        // PROMPT USER TO PRESS ENTER TO RETURN TO MAIN MENU
-        promptEnterKey();
+        // PRINT RESULT
+        System.out.println(addResult);
     }
 
     /**
@@ -182,7 +214,7 @@ public class Menu {
                 String shOwnershipStatus = parts[4].trim();
 
                 // CALL LIBRARY ADDGAME METHOD WITH SHORTHAND INPUT
-                library.addGame(shTitle, shPlatform, shGenre, shReleaseYear, shOwnershipStatus);
+                // library.addGame(shTitle, shPlatform, shGenre, shReleaseYear, shOwnershipStatus);
             } catch (NumberFormatException e) {
                 System.err.println(
                         "Invalid release year format. Please enter a number."
