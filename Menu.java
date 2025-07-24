@@ -10,16 +10,18 @@ public class Menu {
     private final FilterLogic filter;
 
     // USED BY MENU METHODS
-    private final Scanner scanner;
+    private Scanner scanner;
 
     // CONSTRUCTOR REQUIRING CLASS DEPENDENCIES
-    public Menu(Scanner _scanner, Library _library, FilterLogic _filter) {
+    public Menu(Library _library, FilterLogic _filter) {
         this.library = _library;
-        this.scanner = _scanner;
         this.filter = _filter;
     }
 
     public void displayMenu() {
+
+        // MAKE THE SCANNER                
+        scanner = new Scanner(System.in);
 
         // DEFAULT CHOICE
         int choice;
@@ -107,6 +109,10 @@ public class Menu {
                     promptEnterKey();
             }
         } while (choice != 77);
+
+        // END OF MENU PROCESSING
+        // DISPOSE SCANNER
+        scanner.close();
     }
 
     /**

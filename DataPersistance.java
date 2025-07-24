@@ -1,3 +1,4 @@
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,20 +36,17 @@ public class DataPersistance {
                 // NOTE - WE COULD MAKE THIS 'SMART', BUT ONLY IF TIME ALLOWS
                 if (parts.length == 5) {
                     // GET THE VALS, CASTING AS NEEDED
-                    // UID,Name,Year,Developer,Owned,Completion,Rating,Tags
-                    int uid = Integer.parseInt(parts[0].trim());
-                    String name = parts[0].trim();
-                    int year = Integer.parseInt(parts[3].trim());
-                    int developer = Integer.parseInt(parts[3].trim());
-                    String owned = parts[4].trim();
-                    String completion = parts[4].trim();
-                    String rating = parts[4].trim();
-                    String platform = parts[1].trim();
-                    String genre = parts[2].trim();
-                    String tags = parts[2].trim();
+                    // id, title, price, isOwned, tags
+                    String id = parts[0].trim();
+                    String title = parts[1].trim();
+                    int year = Integer.getInteger(parts[2].trim());
+                    Double price = Double.valueOf(parts[3].trim());
+                    Boolean isOwned = "Y".equals(parts[4].trim());
+                    String[] tags = parts[5].trim().split(",");
+                    var tag_list = new ArrayList<>(List.of(tags));
 
                     // CREATE THE GAME OBJ
-                    Game game = new Game(title, platform, genre, releaseYear, ownershipStatus);
+                    Game game = new Game(id, title, year, price, isOwned, tag_list);
 
                     // ADD TO THE RETURN ARRAY
                     return_games_array.add(game);
@@ -76,12 +74,13 @@ public class DataPersistance {
             for (Game game : games) {
 
                 // CREATE THE LINE WITH VALS
-                String line = String.format("%s,%s,%s,%d,%s",
+                String line = String.format("%s,%s,%i,%s,%d,%s",
+                        game.getId(),
                         game.getTitle(),
-                        game.getPlatform(),
-                        game.getGenre(),
-                        game.getReleaseYear(),
-                        game.getOwnershipStatus());
+                        game.getYear(),
+                        game.getPrice(),
+                        game.getIsOwned(),
+                        game.getTags());
 
                 bw.write(line);
                 bw.newLine();

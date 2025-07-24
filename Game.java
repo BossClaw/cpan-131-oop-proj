@@ -1,46 +1,56 @@
 // CLARANCE LEUNG
 
+import java.util.List;
+
 public class Game {
 
+    private String id;
     private String title;
-    private String platform;
-    private String genre;
-    private int releaseYear;
-    private String ownershipStatus;
+    private int year;
+    private double price;
+    private boolean isOwned;
+    private List<String> tags;
 
-    public Game(String title, String platform, String genre, int releaseYear, String ownershipStatus) {
+    public Game(String id, String title, int year, double price, Boolean isOwned, List<String> tags) {
+        this.id = id;
         this.title = title;
-        this.platform = platform;
-        this.genre = genre;
-        this.releaseYear = releaseYear;
-        this.ownershipStatus = ownershipStatus;
+        this.year = year;
+        this.price = price;
+        this.isOwned = (isOwned != null) ? isOwned : false;
+        this.tags = tags;
     }
 
-    // Getters
+    public String getId() {
+        return this.id;
+    }
+
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
-    public String getPlatform() {
-        return platform;
+    public int getYear() {
+        return this.year;
     }
 
-    public String getGenre() {
-        return genre;
+    public double getPrice() {
+        return this.price;
     }
 
-    public int getReleaseYear() {
-        return releaseYear;
+    public Boolean getIsOwned() {
+        return this.isOwned;
     }
 
-    public String getOwnershipStatus() {
-        return ownershipStatus;
+    public List<String> getTags() {
+        return this.tags;
     }
 
+    // ===================================================================================
+    // PROB USELESS
     @Override
+
     public String toString() {
-        return "Title: " + title + ", Platform: " + platform + ", Genre: " + genre
-                + ", Release Year: " + releaseYear + ", Ownership: " + ownershipStatus;
+        return "Title: " + title + ", Price: " + price + ", IsOwned: " + isOwned
+                + ", Tags: " + tags.toString();
     }
 
     public boolean updateGameData(String key, int Value) {
