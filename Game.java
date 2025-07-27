@@ -4,25 +4,41 @@ import java.util.List;
 
 public class Game {
 
-    private String id;
+    private int id;
+    private double price;
     private String title;
     private int year;
-    private boolean isOwned;
+    private int rating;
     private List<String> tags;
-    private double price;
+    private String platform;
+    private boolean isOwned;
+    private String completion;
 
-    public Game(String id, String title, int year, Boolean isOwned, List<String> tags, double price) {
+    public Game(
+            int id,
+            int year,
+            String title,
+            String platform,
+            double price,
+            Boolean isOwned,
+            String completion,
+            int rating,
+            List<String> tags
+    ) {
 
         // System.out.println("[GAME] MAKING A NEW GAME WITH[" + id + "][" + title + "][" + year + "][" + isOwned + "][" + price + "][" + tags + "]");
         this.id = id;
-        this.title = title;
         this.year = year;
-        this.isOwned = (isOwned != null) ? isOwned : false;
-        this.tags = tags;
+        this.title = title;
+        this.platform = platform;
         this.price = price;
+        this.isOwned = (isOwned != null) ? isOwned : false;
+        this.rating = rating;
+        this.completion = completion;
+        this.tags = tags;
     }
 
-    public String getId() {
+    public int getId() {
         return this.id;
     }
 
@@ -34,8 +50,20 @@ public class Game {
         return this.year;
     }
 
+    public String getPlatform() {
+        return this.platform;
+    }
+
+    public String getCompletion() {
+        return this.completion;
+    }
+
     public double getPrice() {
         return this.price;
+    }
+
+    public int getRating() {
+        return this.rating;
     }
 
     public Boolean getIsOwned() {
@@ -54,6 +82,8 @@ public class Game {
                 + ", Tags: " + tags.toString();
     }
 
+    // ===================================================================================
+    // MILESTONE 2 
     public boolean updateGameData(String key, int Value) {
         // TODO - MILESTONE 2        
         return true;

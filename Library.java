@@ -21,19 +21,19 @@ public class Library {
         this.games = new ArrayList<>();
 
         // CHECK FOR .CSV AND LOAD IF AVAIL
-        if (_data.hasCsv()) {
+        if (_data.hasJson()) {
             loadGamesFromDisc();
         }
     }
 
-    // LU'S CODE
+    // MILESTONE 2 - LU'S CODE WIP
     public void removeById(String id) {
-// LU
-        boolean isRemoved = this.games.removeIf(game -> game.getId().equals(id));
 
-        if (!isRemoved) {
-            System.err.println("Cannot find game with id : " + id + "to remove.");
-        }
+        // boolean isRemoved = this.games.removeIf(game -> game.getId().equals(id));
+
+        // if (!isRemoved) {
+        //     System.err.println("Cannot find game with id : " + id + "to remove.");
+        // }
     }
 
     public List<Game> GetGames() {
@@ -57,17 +57,29 @@ public class Library {
     }
 
     // ========================================================================
-    // CREATE
-    // OVERRIDE!!!!
-    public String addGame(String id, String title, int year, boolean owned, List<String> tags, Double price) {
+    // CREATE METHODS, PARAMS & CLONE VIA OVERRIDE
+    public String addGame(
+            int id,
+            int year,
+            String title,
+            String platform,
+            Double price,
+            boolean isOwned,
+            String completion,
+            int rating,
+            List<String> tags
+    ) {
         // CREATE NEW GAME OBJ AND ADD        
         Game newGame = new Game(
                 id,
-                title,
                 year,
-                owned,
-                tags,
-                price
+                title,
+                platform,
+                price,
+                isOwned,
+                completion,
+                rating,
+                tags
         );
 
         return addGame(newGame);
@@ -80,7 +92,7 @@ public class Library {
         this.games.add(newGame);
 
         // SAVE TO DISK USING INJECTED CLASS
-        _data.saveGamesToCsv(this.games);
+        save_games_to_disc();
 
         // RETURN MESG
         return "Game \"" + newGame.getTitle() + "\" added to the library.";
@@ -94,7 +106,7 @@ public class Library {
         // FIND THE EXISTING GAME ID
         // UPDATE
         // SAVE TO DISK USING INJECTED CLASS
-        _data.saveGamesToCsv(this.games);
+        save_games_to_disc();
 
         // System.out.println("Game \"" + game.getTitle() + "\" updated the library.");
     }
@@ -117,7 +129,7 @@ public class Library {
     // LOADING / SAVING
     // DEDICATED FUNCS EASIER TO USE, INTELLISENSE, ALLOWS LOGIC CHANGE IN ONE PLACE
     public void loadGamesFromDisc() {
-        this.games = _data.loadGamesFromCsv();
+        this.games = _data.loadGamesFromJson();
 
         // DEBUG - DUMP LIST OF GAMES
         System.out.println("[LIBARY] LOADED GAMES (" + this.games.size() + ")");
@@ -129,7 +141,7 @@ public class Library {
     }
 
     public void save_games_to_disc() {
-        _data.saveGamesToCsv(this.games);
+        _data.saveGamesToJson(this.games);
     }
 
     // END OF CLASS

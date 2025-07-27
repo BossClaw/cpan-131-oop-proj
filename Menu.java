@@ -23,8 +23,7 @@ public class Menu {
     public void displayMenu() {
 
         // CLEAR SCREEN
-        clearScreen();
-
+        // clearScreen();
         // MAKE THE SCANNER                
         scanner = new Scanner(System.in);
 
@@ -35,7 +34,8 @@ public class Menu {
         do {
 
             // DISPLAY MENU OPTIONS
-            System.out.println("\n--- Video Game Library Menu ---");
+            Print.header("Video Game Library Menu", "yellow");
+
             System.out.println("1. List All Games");
             System.out.println("2. Add New Game");
             System.out.println("3. Edit Game (MILESTONE 2)");
@@ -45,6 +45,7 @@ public class Menu {
             System.out.println("11. Report (MILESTONE 2)");
 
             System.out.println("50. Bulk Import Games from CSV (MILESTONE 2)");
+            System.out.println("51. Bulk Export Games to CSV (MILESTONE 2)");
 
             System.out.println("77. Exit");
 
@@ -70,37 +71,35 @@ public class Menu {
                     // MILESTONE 2
                     //editGame();
                     break;
+                case 4:
+                    // MILESTONE 2
+                    //deleteGame();
+                    break;
 
-                // GAME RETRIEVAL/FILTER/REPORTS
+                // GAME FILTER/REPORT
                 case 10:
-                    // TBD - BEST WAY TO DO THIS
-                    // BLANK FILTER LISTS ALL
-
-                    // LU - 
-                    // filter.listGamesByFilter("");
+                    // LU - FILTER SUBMENU
                     filter.menu(scanner);
-                    // promptEnterKey();
                     break;
                 case 11:
-                    // USER INPUT FILTER
-                    // EG:  genre:Action?,Dating Sim? platform:PC, title:*shock, year: > 1980,  sort:title, year,  ASC
-                    //filter.listGamesByFilter(userFilter);
-                    promptEnterKey();
-                    break;
-                case 12:
-                    // WHOLE REPORT
-                    // filter.listGamesByFilter(userFilter);
-                    promptEnterKey();
+                    // LU - REPORT SUBMENU MILESTONE 2
+                    // report.menu(scanner);                    
                     break;
 
                 // CSV IMPORT/EXPORT
                 case 50:
-                    bulkImportGames();
+                    // CLAW - IMPORT MILESTONE 2
+                    //library.bulkImportGames();
+                    break;
+                case 51:
+                    // CLAW - EXPORT MILESTONE 2
+                    //library.bulkExportGames();
                     break;
 
                 // SYSTEM
                 case 77:
-                    System.out.println("Exiting application. Goodbye!\n\n");
+                    System.out.println("Exiting application. Game on!\n\n");
+                    // TODO - RANDOM GOODBYE MESG
                     break;
 
                 //  SCREW UP
@@ -123,62 +122,62 @@ public class Menu {
         scanner.close();
     }
 
+    private int readInt(String mesg) {
+        System.out.print(mesg);
+        int retVal = scanner.nextInt();
+        scanner.nextLine(); // CONSUME NEWLINE AFTER ALL INTS
+        System.out.println("INPUT ID[" + retVal + "]\n\n");
+        return retVal;
+    }
+
+    private double readDouble(String mesg) {
+        System.out.print(mesg);
+        double retVal = scanner.nextDouble();
+        scanner.nextLine(); // CONSUME NEWLINE AFTER ALL NUMBERS
+        System.out.println("INPUT DOUBLE[" + retVal + "]\n\n");
+        return retVal;
+    }
+
+    private String readString(String mesg) {
+        System.out.print(mesg);
+        String retVal = scanner.nextLine();
+        System.out.println("INPUT STRING[" + retVal + "]\n\n");
+        return retVal;
+    }
+
     /**
      * Adds a new game to the library by prompting the user for details.
      */
     private void addNewGame() {
 
-        System.out.print("Enter game id: ");
-        String id = scanner.nextLine();
-        System.out.println("GOT ID[" + id + "]\n\n");
+        // WIP - WRAPPER FUNCTIONS EG: id = readInt("Enter Game Id")
+        // LESS CODE, QUICKER TO WRITE, DEBUG, DON'T REPEAT YOURSELF, ETC...
+        int id = readInt("Enter ID (integer):");
+        String title = readString("Enter game title: ");
+        int year = readInt("Enter YEAR (4 digit integer):");
+        String platform = readString("Enter Platform: ");
+        double price = readDouble("Price $: ");
+        String owned_str = readString("Owned (Y/N): ");
+        String completion = readString("Completion: ");
+        int rating = readInt("Rating (0-100): ");
+        String tag_str = readString("Enter comma separated tags: ");
 
-        System.out.print("Enter game title: ");
-        String title = scanner.nextLine();
-        System.out.println("GOT TITLE[" + title + "]\n\n");
-
-        System.out.print("Enter release year: ");
-        int year = scanner.nextInt();
-        scanner.nextLine(); // CONSUME NEWLINE AFTER ALL INTS
-        System.out.println("GOT YEAR[" + year + "]\n\n");
-
-        System.out.print("Owned (Y/N): ");
-        String owned_str = scanner.nextLine();
-        System.out.println("GOT OWNED_STR[" + owned_str + "]\n\n");
-
-        // NOTE - CLARANCE DON'T DELETE
-        // System.out.print("Enter genre: ");
-        // String genre = scanner.nextLine();
-        // System.out.println("GOT GENRE[" + genre + "]\n\n");
-        // System.out.print("Enter platform (PC, PlayStation, Xbox, Switch): ");
-        // String platform = scanner.nextLine();
-        // System.out.println("GOT PLATFORM[" + platform + "]\n\n");
-        // System.out.print("Enter ownership status ((O)wned, (W)ishlisted): ");
-        // String ownership = scanner.nextLine();
-        // System.out.println("GOT OWNERSHIP[" + ownership + "]\n\n");
-        // PRICE
-        System.out.print("Enter price $: ");
-        double price = scanner.nextDouble();
-        scanner.nextLine();
-        System.out.println("GOT PRICE[" + price + "]\n\n");
-
-        // TAG SEPARATED STRING
-        System.out.print("Enter comma separated tags: ");
-        String tag_str = scanner.nextLine();
-        System.out.println("GOT TAG STR[" + tag_str + "]\n\n");
-
-        // NOW PREP THE DATA FOR ADDING NEW GAME
-        // NOTE - MAKE A UTIL TO NOT DUPLICATE CODE SO MUCH
+        // PROCESS THE STR VALS, TAG_STR INTO LIST, OWNED_STR INTO BOOLEAN
         var tag_list = new ArrayList<>(List.of(tag_str.trim().split("\\|")));
         var isOwned = "Y".equals(owned_str);
 
         // PASS THE INPUT VARS TO LIBRARY ADDGAME METHOD
         String addResult = library.addGame(
                 id,
-                title,
                 year,
+                title,
+                platform,
+                price,
                 isOwned,
-                tag_list,
-                price);
+                completion,
+                rating,
+                tag_list
+        );
 
         // PRINT RESULT
         System.out.println(addResult);
@@ -188,6 +187,7 @@ public class Menu {
      * Bulk imports games from a CSV file.
      */
     private void bulkImportGames() {
+        // MILESTONE 2
         System.out.print("Enter the path to the CSV file for bulk import: ");
         String csvFilePath = scanner.nextLine();
         // library.bulkImportFromCsv(csvFilePath);

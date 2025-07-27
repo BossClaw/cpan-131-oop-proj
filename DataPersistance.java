@@ -1,105 +1,92 @@
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class DataPersistance {
 
-    // DARRYL LECRAW
-    private final String filePath = "video_games.csv";
+    private final String csvFilePath = "video_games.csv";
+    private final String jsonFilePath = "video_games.json";
+    private final Gson gson = new Gson();
 
-    public boolean hasCsv() {
-        File file = new File(filePath);
+    public boolean hasJson() {
+        File file = new File(jsonFilePath);
         return file.exists() && file.isFile();
     }
 
-    public ArrayList<Game> loadGamesFromCsv() {
-        // MAKE A FRESH ARRAY TO RETURN
-        ArrayList<Game> return_games_array = new ArrayList<>();
+    public ArrayList<Game> loadGamesFromJson() {
+        // MAKE THE RETURN ARRAY
+        ArrayList<Game> ret_games_arr_list = new ArrayList<>();
 
-        // ATTEMPT. USE TRY TO CATCH AND GRACEFULLY HANDLE ERRORS
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        // LOOP AROUND THE READER
+        try (Reader reader = new FileReader(jsonFilePath)) {
+            ret_games_arr_list = gson.fromJson(reader, new TypeToken<ArrayList<Game>>() {
+            }.getType());
+        } catch (IOException e) {
+            System.err.println("Error reading JSON: " + e.getMessage());
+        }
+
+        for (Game game : ret_games_arr_list) {
+            System.out.println("[PERSIST]   + LOADED [" + game.getId() + "][" + game.getYear() + "][" + game.getTitle() + "]");
+        }
+        return ret_games_arr_list;
+    }
+
+    public void saveGamesToJson(List<Game> games) {
+        try (Writer writer = new FileWriter(jsonFilePath)) {
+            gson.toJson(games, writer);
+        } catch (IOException e) {
+            System.err.println("Error writing JSON: " + e.getMessage());
+        }
+    }
+
+    public ArrayList<Game> importFromCSV() {
+        ArrayList<Game> games = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
             boolean isFirstLine = true;
 
             while ((line = br.readLine()) != null) {
-                // SKIP HEADER
                 if (isFirstLine) {
                     isFirstLine = false;
                     continue;
                 }
 
-                // DBG
-                //System.out.println("FILE LINE " + line);
-                // SPLIT BY COMMA CHAR
-                String[] parts = line.split(",");
+                String[] parts = line.split(",", -1);
+                if (parts.length >= 8) {
+                    int id = Integer.parseInt(parts[0]);
+                    String title = parts[1].replaceAll("^\"|\"$", "");
+                    int year = Integer.parseInt(parts[2]);
+                    double rating = Double.parseDouble(parts[3]);
+                    List<String> tags = Arrays.asList(parts[4].replaceAll("^\"|\"$", "").split(";"));
+                    String recommended = parts[5].replaceAll("\"", "");
+                    String platform = parts[6].replaceAll("\"", "");
+                    String completion = parts[7].replaceAll("\"", "");
 
-                // ONLY ACCEPT MATCHING
-                // NOTE - WE COULD MAKE THIS 'SMART', BUT ONLY IF TIME ALLOWS
-                if (parts.length == 6) {
-
-                    // GET THE VALS, CASTING AS NEEDED
-                    // id, title, year, isOwned, tags, price
-                    String id = parts[0].trim();
-                    String title = parts[1].trim();
-                    int year = Integer.parseInt(parts[2].trim());
-                    Boolean isOwned = "Y".equals(parts[3].trim());
-
-                    // SPLIT THE TAGS AND CHANGE TO VALUE
-                    String[] tags = parts[4].trim().split("\\|");
-                    var tag_list = new ArrayList<>(List.of(tags));
-
-                    // PRICE
-                    Double price = Double.valueOf(parts[5].trim());
-
-                    // CREATE THE GAME OBJ
-                    Game game = new Game(id, title, year, isOwned, tag_list, price);
-
-                    // ADD TO THE RETURN ARRAY
-                    return_games_array.add(game);
+                    games.add(new Game(id, title, year, rating, tags, recommended, platform, completion));
                 }
             }
-
-        } catch (IOException | NumberFormatException e) {
-            // TODO - HANDLE ERROR GRACEFULLY
-            e.printStackTrace();
+        } catch (IOException e) {
+            System.err.println("Error importing CSV: " + e.getMessage());
         }
-
-        // RETURN THE ARRAY
-        return return_games_array;
+        return games;
     }
 
-    public boolean saveGamesToCsv(List<Game> games) {
-        boolean saveSuccess = true;
+    public void exportToCSV(List<Game> games) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(csvFilePath))) {
+            pw.println("ID,Title,ReleaseYear,Rating,Tags,Recommended,Platform,Completion");
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
-            // WRITE HEADER
-            bw.write("Id,Title,Year,isOwned,Tags,Price");
-            bw.newLine();
-
-            // LOOP THROUGH EACH GAME OBJ
-            for (Game game : games) {
-
-                // CREATE THE LINE WITH VALS
-                String line = String.format("%s,%s,%d,%s,%s,%.2f",
-                        game.getId(),
-                        game.getTitle(),
-                        game.getYear(),
-                        game.getIsOwned() ? "Y" : "N",
-                        // COLLAPSE TAGS TO STRING
-                        String.join("|", game.getTags()),
-                        // PRICE
-                        game.getPrice());
-
-                bw.write(line);
-                bw.newLine();
+            for (Game g : games) {
+                String tags = String.join(";", g.getTags());
+                pw.printf("%d,\"%s\",%d,%.1f,\"%s\",\"%s\",\"%s\",\"%s\"%n",
+                        g.getId(), g.getTitle(), g.getReleaseYear(), g.getRating(),
+                        tags, g.getRecommended(), g.getPlatform(), g.getCompletion());
             }
-
         } catch (IOException e) {
-            e.printStackTrace();
-            saveSuccess = false;
+            System.err.println("Error exporting CSV: " + e.getMessage());
         }
-
-        return saveSuccess;
     }
 }
