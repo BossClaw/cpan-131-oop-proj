@@ -137,6 +137,7 @@ public class GameFilter {
         List<Game> games = new ArrayList<>(liberary.getAllGames());
 
         // Get all tags
+        // V2DO - GRAB THE TAGS IN THE LIBRARY CLASS ON EVERY LOAD/WRITE
         Set<String> displayTagsSet = new HashSet<>();
         for (Game game : games) {
             displayTagsSet.addAll(game.getTags());

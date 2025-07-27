@@ -29,9 +29,10 @@ public class DataPersistance {
             System.err.println("Error reading JSON: " + e.getMessage());
         }
 
-        for (Game game : ret_games_arr_list) {
-            System.out.println("[PERSIST]   + LOADED [" + game.getId() + "][" + game.getYear() + "][" + game.getTitle() + "]");
-        }
+        // DEBUG OUTPUT ON LOAD
+        // for (Game game : ret_games_arr_list) {
+        //     System.out.println("[PERSIST]   + LOADED [" + game.getId() + "][" + game.getYear() + "][" + game.getTitle() + "]");
+        // }
         return ret_games_arr_list;
     }
 
@@ -82,8 +83,8 @@ public class DataPersistance {
             for (Game g : games) {
                 String tags = String.join(";", g.getTags());
                 pw.printf("%d,\"%s\",%d,%.1f,\"%s\",\"%s\",\"%s\",\"%s\"%n",
-                        g.getId(), g.getTitle(), g.getReleaseYear(), g.getRating(),
-                        tags, g.getRecommended(), g.getPlatform(), g.getCompletion());
+                        g.getId(), g.getTitle(), g.getYear(), g.getRating(),
+                        tags, g.getRating(), g.getPlatform(), g.getCompletion());
             }
         } catch (IOException e) {
             System.err.println("Error exporting CSV: " + e.getMessage());
