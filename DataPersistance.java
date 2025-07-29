@@ -67,7 +67,8 @@ public class DataPersistance {
                     String platform = parts[6].replaceAll("\"", "");
                     String completion = parts[7].replaceAll("\"", "");
 
-                    games.add(new Game(id, title, year, rating, tags, recommended, platform, completion));
+                    //games.add(new Game(id, title, year, rating, tags, recommended, platform, completion));
+                    
                 }
             }
         } catch (IOException e) {

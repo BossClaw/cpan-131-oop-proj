@@ -235,7 +235,7 @@ public class Menu {
         }
     }
 
-    public Array[] getExitMesgArr() {
+    public String[] getExitMesgArr() {
         return exitMesgArr;
     }
 }
