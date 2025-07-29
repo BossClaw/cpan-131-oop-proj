@@ -16,6 +16,7 @@ public class Main {
         Menu menu = new Menu(library, filter);
 
         // RUN IT
+        Print.logo();
         menu.displayMenu();
     }
 }
