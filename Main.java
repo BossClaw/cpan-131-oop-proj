@@ -12,8 +12,6 @@ public class Main {
         // Create a filter
         GameFilter filter = new GameFilter(library);
         
-
-
         // CREATE MENU
         Menu menu = new Menu(library, filter);
 
