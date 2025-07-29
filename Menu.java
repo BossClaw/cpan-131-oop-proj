@@ -53,7 +53,7 @@ public class Menu {
             System.out.println("4. Delete Game (MILESTONE 2)");
 
             System.out.println("10. Filter");
-            System.out.println("11. Report (MILESTONE 2)");
+            System.out.println("11. Report");
 
             System.out.println("50. Bulk Import Games from CSV (MILESTONE 2)");
             System.out.println("51. Bulk Export Games to CSV (MILESTONE 2)");
