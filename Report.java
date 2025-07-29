@@ -131,7 +131,7 @@ public class Report {
     System.out.println("");
 
     // ------------------ Ask user to Exit
-    System.out.print(Color.colorize(color, "> [Print] (0 to exit): "));
+    System.out.print(Color.colorize(color, "> (0 to exit): "));
     String input = scan.nextLine();
     if (input.equals("0")) {
       return;
