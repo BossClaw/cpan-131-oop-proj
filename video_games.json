@@ -49,7 +49,7 @@
         "rating": 0,
         "tags": [
             "Platformer",
-            "Family-Friendly"
+            "Family"
         ],
         "platform": "NES",
         "isOwned": false,
@@ -108,7 +108,7 @@
         "rating": 97,
         "tags": [
             "Open-World",
-            "Action-Adventure"
+            "Action"
         ],
         "platform": "PS2",
         "isOwned": false,
@@ -360,7 +360,7 @@
         "year": 1985,
         "rating": 99,
         "tags": [
-            "platformer,fantasy,adventure,comedy"
+            "platformer"
         ],
         "platform": "NES",
         "isOwned": true,
@@ -386,7 +386,7 @@
     {
         "id": 123,
         "price": 19.22,
-        "title": "title",
+        "title": "Type or Die",
         "year": 2021,
         "rating": 80,
         "tags": [
