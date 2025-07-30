@@ -3,7 +3,6 @@ id,platform,year,title,price,isOwned,completion,rating,tags
 5,NES,1986,Adventure of Link,29.99,true,Main Story,99,Adventure;RPG;Story-Rich
 2,Arcade,1980,Pac-Man,19.99,false,0%,0,Arcade;Maze
 1,Arcade,1972,Pong,19.99,false,0%,0,Arcade;Sports
-21,PC,2017,Fortnite,19.99,false,100%,87,Battle Royale;Multiplayer
 777,NES,1985,Doki Doki Picnic,19.95,true,NG++,99,Food;Platformer
 14,N64,1997,GoldenEye 007,19.99,true,Main Story,93,FPS;Multiplayer
 7,Xbox,2001,Halo: Combat Evolved,19.99,false,Main Story,97,FPS;Sci-Fi;Multiplayer
@@ -47,3 +46,4 @@ id,platform,year,title,price,isOwned,completion,rating,tags
 783,NES,2015,Skatepark Minister,19.99,true,Main Story,94,Sports;Faith
 778,PS1,2010,Turbo Chess 3000,19.99,true,NG+,99,Strategy;Classic;Board Game
 792,NES,1992,Zombie Librarian,19.99,true,Level 1,85,Undead;Strategy;Dating Sim
+777,PC,2025,Brave Slimestronauts,2.1,true,77%,100,Space;Colour Matching;Retro;Indie

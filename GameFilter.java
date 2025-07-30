@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class GameFilter {
 
-    private Library liberary;
+    private Library library;
     private final String color = "CYAN";
     private final String innerColor = "blue";
     private final String[] options = {
@@ -23,8 +23,8 @@ public class GameFilter {
         "Exit"
     };
 
-    public GameFilter(Library liberary) {
-        this.liberary = liberary;
+    public GameFilter(Library library) {
+        this.library = library;
     }
 
     // Print main menu
@@ -120,7 +120,7 @@ public class GameFilter {
         }
 
         // Find games
-        List<Game> games = new ArrayList<>(liberary.getAllGames());
+        List<Game> games = new ArrayList<>(library.getAllGames());
         List<Game> filteredGames = games.stream()
                 .filter(game -> game.getTitle().toLowerCase().contains(input.toLowerCase()))
                 .collect(Collectors.toList());
@@ -134,7 +134,7 @@ public class GameFilter {
 
     // Find by tags
     public void findByTag(Scanner scan) {
-        List<Game> games = new ArrayList<>(liberary.getAllGames());
+        List<Game> games = new ArrayList<>(library.getAllGames());
 
         // Get all tags
         // V2DO - GRAB THE TAGS IN THE LIBRARY CLASS ON EVERY LOAD/WRITE
@@ -189,7 +189,7 @@ public class GameFilter {
 
     // Find by owned
     public void findByOwnGame(Scanner scan) {
-        List<Game> games = new ArrayList<>(liberary.getAllGames());
+        List<Game> games = new ArrayList<>(library.getAllGames());
 
         // Ask user
         System.out.print(Color.colorize(innerColor, "> [Find By Owned] Enter T / F (0 to exit): "));
@@ -216,7 +216,7 @@ public class GameFilter {
 
     // Find by price
     public void findByPrice(Scanner scan) {
-        List<Game> games = new ArrayList<>(liberary.getAllGames());
+        List<Game> games = new ArrayList<>(library.getAllGames());
 
         // Ask for operator
         System.out
@@ -264,7 +264,7 @@ public class GameFilter {
 
     // Sort By
     public void sort(Scanner scan) {
-        List<Game> games = new ArrayList<>(liberary.getAllGames());
+        List<Game> games = new ArrayList<>(library.getAllGames());
 
         // Ask input sort by option
         System.out

@@ -1,3 +1,4 @@
+// Kuo Yu Lu
 
 import java.util.List;
 
@@ -97,6 +98,11 @@ public class Print {
             }
         }
 
+        // REQUIRES AT LEAST 1???
+        maxTitleLength = Math.max(1, maxTitleLength);
+        maxPlatformLength = Math.max(1, maxPlatformLength);
+        maxCompletionLength = Math.max(1, maxCompletionLength);
+
         // Header
         String headerText = title;
         if (showCount) {
@@ -104,7 +110,7 @@ public class Print {
         }
         header(headerText, color);
 
-        if (games.size() == 0) {
+        if (games.isEmpty()) {
             // No Result
             line("No Result", defaultWidth, " ", "white");
         } else {
@@ -113,7 +119,7 @@ public class Print {
 
                 // MAKE THE STRINGS
                 String extraString = String.format(
-                        "[%4d] %d %-" + maxTitleLength + "s %-" + maxPlatformLength + "s $%.2f %s %-" + maxCompletionLength + "s %3d Tags: %s",
+                        "[%4d] %d %-" + maxTitleLength + "s %-" + maxPlatformLength + "s $%7.2f %s %-" + maxCompletionLength + "s %3d Tags: %s",
                         game.getId(),
                         game.getYear(),
                         game.getTitle(),

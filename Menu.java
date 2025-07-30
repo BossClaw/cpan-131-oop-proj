@@ -1,4 +1,4 @@
-
+// Everyone
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -29,8 +29,7 @@ public class Menu {
         "Hit it in the glowy bit!",
         "Save the Kidnapped Royalty!",
         "Arise Tarnished One!",
-        "WAKKA WAKKA WAKKA!",
-    };
+        "WAKKA WAKKA WAKKA!",};
 
     public void displayMenu() {
 
@@ -51,8 +50,8 @@ public class Menu {
 
             System.out.println("1. List All Games");
             System.out.println("2. Add New Game");
-            System.out.println("3. Edit Game (MILESTONE 2)");
-            System.out.println("4. Delete Game (MILESTONE 2)");
+            System.out.println("3. Edit Game");
+            System.out.println("4. Delete Game");
             System.out.println("");
 
             System.out.println("10. Filter");
@@ -84,15 +83,12 @@ public class Menu {
                     break;
                 case 2:
                     addNewGame();
-                    // MILESTONE 2 editGameShorthand();
                     break;
                 case 3:
-                    // MILESTONE 2
-                    // editGame();
+                    library.editGame(scanner);
                     break;
                 case 4:
-                    // MILESTONE 2
-                    // deleteGame();
+                    library.deleteGame(scanner);
                     break;
 
                 // GAME FILTER/REPORT
@@ -142,45 +138,19 @@ public class Menu {
         scanner.close();
     }
 
-    private int readInt(String mesg) {
-        System.out.print(mesg);
-        int retVal = scanner.nextInt();
-        scanner.nextLine(); // CONSUME NEWLINE AFTER ALL INTS
-        // System.out.println("INPUT ID[" + retVal + "]\n\n");
-        return retVal;
-    }
-
-    private double readDouble(String mesg) {
-        System.out.print(mesg);
-        double retVal = scanner.nextDouble();
-        scanner.nextLine(); // CONSUME NEWLINE AFTER ALL NUMBERS
-        // System.out.println("INPUT DOUBLE[" + retVal + "]\n\n");
-        return retVal;
-    }
-
-    private String readString(String mesg) {
-        System.out.print(mesg);
-        String retVal = scanner.nextLine();
-        // System.out.println("INPUT STRING[" + retVal + "]\n\n");
-        return retVal;
-    }
-
-    /**
-     * Adds a new game to the library by prompting the user for details.
-     */
+    // ADDS A NEW GAME TO THE LIBRARY BY PROMPTING THE USER FOR DETAILS.
     private void addNewGame() {
 
-        // WIP - WRAPPER FUNCTIONS EG: id = readInt("Enter Game Id")
-        // LESS CODE, QUICKER TO WRITE, DEBUG, DON'T REPEAT YOURSELF, ETC...
-        int id = readInt("Enter ID (integer):");
-        String title = readString("Enter game title: ");
-        int year = readInt("Enter YEAR (4 digit integer):");
-        String platform = readString("Enter Platform: ");
-        double price = readDouble("Price $: ");
-        String owned_str = readString("Owned (Y/N): ");
-        String completion = readString("Completion: ");
-        int rating = readInt("Rating (0-100): ");
-        String tag_str = readString("Enter comma separated tags: ");
+        // NOTE - WRAPPER FUNCTIONS LESS CODE, QUICKER TO WRITE, DEBUG, DON'T REPEAT YOURSELF, ETC...
+        int id = utils.readInt(scanner, "ID (integer): ");
+        String title = utils.readString(scanner, "Title: ");
+        int year = utils.readInt(scanner, "Year (4 digit integer): ");
+        String platform = utils.readString(scanner, "Platform: ");
+        double price = utils.readDouble(scanner, "Price $: ");
+        String owned_str = utils.readString(scanner, "Owned (Y/N): ");
+        String completion = utils.readString(scanner, "Completion: ");
+        int rating = utils.readInt(scanner, "Rating (0-100): ");
+        String tag_str = utils.readString(scanner, "Enter comma separated tags: ");
 
         // PROCESS THE STR VALS, TAG_STR INTO LIST, OWNED_STR INTO BOOLEAN
         var tag_list = new ArrayList<>(List.of(tag_str.trim().split("\\,")));
