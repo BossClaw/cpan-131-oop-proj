@@ -1,6 +1,4 @@
-// EVERYONE
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -23,12 +21,15 @@ public class Menu {
     }
 
     private final String[] exitMesgArr = {
-            "Game On!",
-            "Now You're Playing with power!",
-            "Boop Boop Beep Beep!",
-            "Kick Shell!",
-            "Level Up!",
-            "Hit it in the glowy bit!"
+        "Game On!",
+        "Now You're Playing with power!",
+        "Boop Boop Beep Beep!",
+        "Kick Some Shell!",
+        "Level Up!",
+        "Hit it in the glowy bit!",
+        "Save the Kidnapped Royalty!",
+        "Arise Tarnished One!",
+        "WAKKA WAKKA WAKKA!",
     };
 
     public void displayMenu() {
@@ -46,17 +47,21 @@ public class Menu {
 
             // DISPLAY MENU OPTIONS
             Print.header("Video Game Library Menu", "yellow");
+            System.out.println("");
 
             System.out.println("1. List All Games");
             System.out.println("2. Add New Game");
             System.out.println("3. Edit Game (MILESTONE 2)");
             System.out.println("4. Delete Game (MILESTONE 2)");
+            System.out.println("");
 
             System.out.println("10. Filter");
             System.out.println("11. Report");
+            System.out.println("");
 
-            System.out.println("50. Bulk Import Games from CSV (MILESTONE 2)");
-            System.out.println("51. Bulk Export Games to CSV (MILESTONE 2)");
+            System.out.println("50. Bulk Export Games to CSV");
+            System.out.println("51. Bulk Import Games from CSV");
+            System.out.println("");
 
             System.out.println("77. Exit");
 
@@ -100,23 +105,22 @@ public class Menu {
                     report.print(scanner);
                     break;
 
-                // CSV IMPORT/EXPORT
+                // CSV EXPORT/IMPORT
                 case 50:
-                    // CLAW - IMPORT MILESTONE 2
-                    // library.bulkImportGames();
+                    library.bulkExportGames();
                     break;
                 case 51:
-                    // CLAW - EXPORT MILESTONE 2
-                    // library.bulkExportGames();
+                    library.bulkImportGames();
                     break;
 
                 // SYSTEM
                 case 77:
                     System.out.println("Exiting application.\n");
 
+                    // RANDOM EXIT MESG
                     System.out.println(Color.green(utils.getRandomMessage(exitMesgArr)));
+                    System.out.println("\n\n");
 
-                    // TODO - RANDOM GOODBYE MESG
                     break;
 
                 // MAKE AN ERROR

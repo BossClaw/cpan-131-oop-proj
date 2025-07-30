@@ -1,4 +1,3 @@
-// JASMIE SANDERS
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +29,6 @@ public class Library {
     public void removeById(String id) {
 
         // boolean isRemoved = this.games.removeIf(game -> game.getId().equals(id));
-
         // if (!isRemoved) {
         //     System.err.println("Cannot find game with id : " + id + "to remove.");
         // }
@@ -54,6 +52,19 @@ public class Library {
             System.out.printf("%-3d %s\n", count, game.getTitle());
             count++;
         }
+    }
+
+    // ========================================================================
+    // EXPORT / IMPORT
+
+    public void bulkExportGames() {
+        // USE THE dataPersistenceClass EXPORT
+        _data.exportToCSV(games);
+    }
+
+    public void bulkImportGames() {
+        // USE THE dataPersistenceClass IMPORT
+        games = _data.importFromCSV();
     }
 
     // ========================================================================
