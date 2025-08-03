@@ -10,30 +10,32 @@ public class Menu {
     // HANDLES ALL THE USER INPUT AND MENU LOGIC w/DEPENDENCY INJECTION CLASSES
     private final Library library;
     private final GameFilter filter;
+    private final Report report;
 
     // USED BY MENU METHODS
     private Scanner scanner;
 
     // CONSTRUCTOR REQUIRING CLASS DEPENDENCIES
-    public Menu(Library _library, GameFilter _filter) {
+    public Menu(Library _library, GameFilter _filter, Report _report) {
         this.library = _library;
         this.filter = _filter;
+        this.report = _report;
     }
 
     private final String[] exitMesgArr = {
-        "Game On!",
-        "Now You're Playing with power!",
-        "Boop Boop Beep Beep!",
-        "Kick Shell!",
-        "Level Up!",
-        "Hit it in the glowy bit!"
+            "Game On!",
+            "Now You're Playing with power!",
+            "Boop Boop Beep Beep!",
+            "Kick Shell!",
+            "Level Up!",
+            "Hit it in the glowy bit!"
     };
 
     public void displayMenu() {
 
         // CLEAR SCREEN
         // clearScreen();
-        // MAKE THE SCANNER                
+        // MAKE THE SCANNER
         scanner = new Scanner(System.in);
 
         // DEFAULT CHOICE
@@ -51,7 +53,7 @@ public class Menu {
             System.out.println("4. Delete Game (MILESTONE 2)");
 
             System.out.println("10. Filter");
-            System.out.println("11. Report (MILESTONE 2)");
+            System.out.println("11. Report");
 
             System.out.println("50. Bulk Import Games from CSV (MILESTONE 2)");
             System.out.println("51. Bulk Export Games to CSV (MILESTONE 2)");
@@ -81,11 +83,11 @@ public class Menu {
                     break;
                 case 3:
                     // MILESTONE 2
-                    //editGame();
+                    // editGame();
                     break;
                 case 4:
                     // MILESTONE 2
-                    //deleteGame();
+                    // deleteGame();
                     break;
 
                 // GAME FILTER/REPORT
@@ -95,13 +97,13 @@ public class Menu {
                     break;
                 case 11:
                     // LU - REPORT SUBMENU MILESTONE 2
-                    // report.menu(scanner);                    
+                    report.print(scanner);
                     break;
 
                 // CSV IMPORT/EXPORT
                 case 50:
                     // CLAW - IMPORT MILESTONE 2
-                    //library.bulkImportGames();
+                    // library.bulkImportGames();
                     break;
                 case 51:
                     // CLAW - EXPORT MILESTONE 2
@@ -117,13 +119,12 @@ public class Menu {
                     // TODO - RANDOM GOODBYE MESG
                     break;
 
-                //  MAKE AN ERROR
+                // MAKE AN ERROR
                 case 999:
                     System.out.println("You chose to make error! This is not a valid option.");
                     System.out.println("Please choose a valid option from the menu.");
                     throw new UnsupportedOperationException(
-                            "This is a placeholder for a future feature or error handling."
-                    );
+                            "This is a placeholder for a future feature or error handling.");
 
                 // DEFAULT
                 default:
@@ -141,7 +142,7 @@ public class Menu {
         System.out.print(mesg);
         int retVal = scanner.nextInt();
         scanner.nextLine(); // CONSUME NEWLINE AFTER ALL INTS
-        //System.out.println("INPUT ID[" + retVal + "]\n\n");
+        // System.out.println("INPUT ID[" + retVal + "]\n\n");
         return retVal;
     }
 
@@ -149,14 +150,14 @@ public class Menu {
         System.out.print(mesg);
         double retVal = scanner.nextDouble();
         scanner.nextLine(); // CONSUME NEWLINE AFTER ALL NUMBERS
-        //System.out.println("INPUT DOUBLE[" + retVal + "]\n\n");
+        // System.out.println("INPUT DOUBLE[" + retVal + "]\n\n");
         return retVal;
     }
 
     private String readString(String mesg) {
         System.out.print(mesg);
         String retVal = scanner.nextLine();
-        //System.out.println("INPUT STRING[" + retVal + "]\n\n");
+        // System.out.println("INPUT STRING[" + retVal + "]\n\n");
         return retVal;
     }
 
@@ -191,8 +192,7 @@ public class Menu {
                 isOwned,
                 completion,
                 rating,
-                tag_list
-        );
+                tag_list);
 
         // PRINT RESULT
         System.out.println(addResult);

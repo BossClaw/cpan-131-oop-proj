@@ -49,7 +49,11 @@
         "rating": 0,
         "tags": [
             "Platformer",
+<<<<<<< HEAD
             "Family-Friendly"
+=======
+            "Family"
+>>>>>>> 90026e243aa103d3616b2a156677c69909a084e0
         ],
         "platform": "NES",
         "isOwned": false,
@@ -108,7 +112,11 @@
         "rating": 97,
         "tags": [
             "Open-World",
+<<<<<<< HEAD
             "Action-Adventure"
+=======
+            "Action"
+>>>>>>> 90026e243aa103d3616b2a156677c69909a084e0
         ],
         "platform": "PS2",
         "isOwned": false,
@@ -360,7 +368,11 @@
         "year": 1985,
         "rating": 99,
         "tags": [
+<<<<<<< HEAD
             "platformer,fantasy,adventure,comedy"
+=======
+            "platformer"
+>>>>>>> 90026e243aa103d3616b2a156677c69909a084e0
         ],
         "platform": "NES",
         "isOwned": true,
@@ -386,7 +398,11 @@
     {
         "id": 123,
         "price": 19.22,
+<<<<<<< HEAD
         "title": "title",
+=======
+        "title": "Type or Die",
+>>>>>>> 90026e243aa103d3616b2a156677c69909a084e0
         "year": 2021,
         "rating": 80,
         "tags": [
