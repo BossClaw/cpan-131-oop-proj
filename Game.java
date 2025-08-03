@@ -1,4 +1,4 @@
-// CLARANCE LEUNG
+// Clarance Leung
 
 import java.util.List;
 
@@ -38,40 +38,74 @@ public class Game {
         this.tags = tags;
     }
 
+    // GET BUT NOT SET
     public int getId() {
         return this.id;
     }
 
+    // GET/SET
     public String getTitle() {
         return this.title;
+    }
+
+    public void setTitle(String newVal) {
+        this.title = newVal;
     }
 
     public int getYear() {
         return this.year;
     }
 
+    public void setYear(int newVal) {
+        this.year = newVal;
+    }
+
     public String getPlatform() {
         return this.platform;
+    }
+
+    public void setPlatform(String newVal) {
+        this.platform = newVal;
     }
 
     public String getCompletion() {
         return this.completion;
     }
 
+    public void setCompletion(String newVal) {
+        this.completion = newVal;
+    }
+
     public double getPrice() {
         return this.price;
+    }
+
+    public void setPrice(double newVal) {
+        this.price = newVal;
     }
 
     public int getRating() {
         return this.rating;
     }
 
+    public void setRating(int newVal) {
+        this.rating = newVal;
+    }
+
     public Boolean getIsOwned() {
         return this.isOwned;
     }
 
+    public void setIsOwned(boolean newVal) {
+        this.isOwned = newVal;
+    }
+
     public List<String> getTags() {
         return this.tags;
+    }
+
+    public void setTags(List<String> newVal) {
+        this.tags = newVal;
     }
 
     // ===================================================================================

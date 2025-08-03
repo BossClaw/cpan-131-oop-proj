@@ -1,33 +1,30 @@
-
 // Kuo Yu Lu
+
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Report {
-  private Library liberary;
+
+  private Library library;
   private final String color = "green";
   private final String innerColor = "blue";
 
   public Report(Library liberary) {
-    this.liberary = liberary;
+    this.library = liberary;
   }
 
   public void print(Scanner scan) {
     Print.header("Game Report", color);
 
     // Get all the games
-    List<Game> games = new ArrayList<>(liberary.getAllGames());
+    List<Game> games = new ArrayList<>(library.getAllGames());
 
-    // ------------- Statics -------------------
-    System.out.println(Color.green("STATICS"));
+    // ------------- Statistics -------------------
+    System.out.println(Color.green("STATISTICS"));
 
     // Count
     int totalGameCount = games.size();
@@ -131,7 +128,7 @@ public class Report {
     System.out.println("");
 
     // ------------------ Ask user to Exit
-    System.out.print(Color.colorize(color, "> [Print] (0 to exit): "));
+    System.out.print(Color.colorize(color, "> (0 to exit): "));
     String input = scan.nextLine();
     if (input.equals("0")) {
       return;

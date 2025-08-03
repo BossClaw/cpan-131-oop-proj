@@ -1,4 +1,4 @@
-// EVERYONE
+// Everyone
 
 public class Main {
 

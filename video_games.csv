@@ -1,0 +1,49 @@
+id,platform,year,title,price,isOwned,completion,rating,tags
+20,PS3,2013,The Last of Us,19.99,true,Main Story,90,Action;Story-Rich
+5,NES,1986,Adventure of Link,29.99,true,Main Story,99,Adventure;RPG;Story-Rich
+2,Arcade,1980,Pac-Man,19.99,false,0%,0,Arcade;Maze
+1,Arcade,1972,Pong,19.99,false,0%,0,Arcade;Sports
+777,NES,1985,Doki Doki Picnic,19.95,true,NG++,99,Food;Platformer
+14,N64,1997,GoldenEye 007,19.99,true,Main Story,93,FPS;Multiplayer
+7,Xbox,2001,Halo: Combat Evolved,19.99,false,Main Story,97,FPS;Sci-Fi;Multiplayer
+6,PC,1998,Half-Life,19.99,true,Main Story,96,FPS;Sci-Fi;Story-Rich
+18,PC,2007,BioShock,19.99,false,Main Story,88,FPS;Story-Rich
+16,PC,2000,Counter-Strike,19.99,false,Main Story,86,FPS;Tactical
+781,PC,2014,Synthwave Saboteur,19.99,true,100%,73,Music
+782,PS1,1999,Neon Blitz,19.99,true,Level 3,95,Colour Matching; Puzzle
+787,PC,1998,Time Goat,19.99,true,,98,Temporal;Puzzle
+788,PS1,2010,Clawtopia DX,19.99,false,,85,Puzzle;Action
+790,Arcade,1988,Dream Pet Hackers,19.99,true,,98,Animals;Arcade
+791,NES,2000,Retro Kart Racers,19.99,true,,79,Racing
+793,Switch,1986,Viking Opera,19.99,true,,78,Music;Brawl
+795,PS1,1993,Dungeon Darts,19.99,false,,79,Sports;RPG
+785,NES,1994,Snail Fury,19.99,true,World 8,77,Insects;Beat Em Up
+123,xbox,2021,Type or Die,19.22,true,0,80,Learning;Arcade
+9,PC,2004,World of Warcraft,19.99,true,Turtorial,93,MMO;Fantasy
+343,Arcade,1992,Turtle Soup,129.96,true,Level 3,77,ninja;action;platformer;Kicks;Bricks
+8,PS2,2001,Grand Theft Auto III,19.99,false,Main Story,97,Open-World;Action
+13,N64,1996,Super Mario 64,19.99,false,99/100 Stars,91,Platformer;3D
+12,Arcade,1981,Donkey Kong,19.99,true,100%,98,Platformer;Arcade
+4,NES,1985,Super Mario Bros.,19.99,false,Main Story,0,Platformer;Family
+22,PC,2018,Celeste,19.99,true,0%,89,Platformer;Indie
+3,Game Boy,1985,Tetris,19.99,false,0%,0,Puzzle;Casual
+780,PS1,1995,Cosmo Plumber,19.99,true,Level 3,80,Puzzle;Logic
+794,NES,2022,Quantum Janitor,19.99,true,NG+,91,Puzzle;Logic;Dating Sim
+19,PC,2007,Portal,19.99,false,4/10 Levels,86,Puzzle;Sci-Fi
+779,PS1,2007,Pixel Gladiators,19.99,false,Main Story,93,Retro;Beat Em Up
+789,Arcade,1992,Astro Tapper,19.99,true,Main Story,72,Rhythm;Space
+796,PC,2002,Rhythm Vortex,19.99,true,NG+,78,Rhythm;Space
+784,PC,1981,Bingo Bots,19.99,false,Level 8,71,Rng
+23,PC,2020,Hades,19.99,false,0%,91,Roguelike;Action
+797,PS1,1980,Knightlight Saga,19.99,true,NG+,73,RPG
+24,PC,2022,Elden Ring,19.99,true,100%,90,RPG;Open-World
+25,PC,2023,Baldur's Gate 3,19.99,false,Tutorial,85,RPG;Turn-Based
+15,PC,1998,StarCraft,19.99,false,0%,92,RTS;Sci-Fi
+10,PC,2011,Minecraft,19.99,false,0%,93,Sandbox;Creative;Indie
+11,Arcade,1978,Space Invaders,19.99,false,100%,89,Shooter;Arcade;Space
+17,PC,2000,The Sims,19.99,true,Main Story,85,Simulation;Life Sim
+786,Arcade,2022,Hoverboard Heroine,19.99,true,NG+,91,Sports;Dating Sim
+783,NES,2015,Skatepark Minister,19.99,true,Main Story,94,Sports;Faith
+778,PS1,2010,Turbo Chess 3000,19.99,true,NG+,99,Strategy;Classic;Board Game
+792,NES,1992,Zombie Librarian,19.99,true,Level 1,85,Undead;Strategy;Dating Sim
+777,PC,2025,Brave Slimestronauts,2.1,true,77%,100,Space;Colour Matching;Retro;Indie
