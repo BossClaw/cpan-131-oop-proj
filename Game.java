@@ -4,7 +4,10 @@ import java.util.List;
 
 public class Game {
 
-    private int id;
+    // GAME OBJ PROPERITES THAT CANNOT CHANGE
+    private final int id;
+    
+    // GAME OBJ PROPERITES THAT CAN CHANGE
     private double price;
     private String title;
     private int year;
@@ -14,6 +17,7 @@ public class Game {
     private boolean isOwned;
     private String completion;
 
+    // GAME CONSTRUCTOR
     public Game(
             int id,
             int year,
@@ -25,8 +29,7 @@ public class Game {
             int rating,
             List<String> tags
     ) {
-
-        // System.out.println("[GAME] MAKING A NEW GAME WITH[" + id + "][" + title + "][" + year + "][" + isOwned + "][" + price + "][" + tags + "]");
+        // SET THE PROPERTIES ON THE OBJ FROM THE CONSTRUCTOR PARAMETERS
         this.id = id;
         this.year = year;
         this.title = title;
@@ -38,7 +41,7 @@ public class Game {
         this.tags = tags;
     }
 
-    // GET BUT NOT SET
+    // GETTER BUT NOT SETTER BECAUSE IS FINAL PROPERTY
     public int getId() {
         return this.id;
     }
@@ -106,25 +109,5 @@ public class Game {
 
     public void setTags(List<String> newVal) {
         this.tags = newVal;
-    }
-
-    // ===================================================================================
-    // PROB USELESS
-    @Override
-    public String toString() {
-        return "Title: " + title + ", Price: " + price + ", IsOwned: " + isOwned
-                + ", Tags: " + tags.toString();
-    }
-
-    // ===================================================================================
-    // MILESTONE 2 
-    public boolean updateGameData(String key, int Value) {
-        // TODO - MILESTONE 2        
-        return true;
-    }
-
-    public boolean updateGameData(String key, String Value) {
-        // TODO - MILESTONE 2
-        return true;
     }
 }

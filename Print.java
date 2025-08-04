@@ -98,7 +98,7 @@ public class Print {
             }
         }
 
-        // REQUIRES AT LEAST 1???
+        // REQUIRES AT LEAST 1
         maxTitleLength = Math.max(1, maxTitleLength);
         maxPlatformLength = Math.max(1, maxPlatformLength);
         maxCompletionLength = Math.max(1, maxCompletionLength);

@@ -1,15 +1,16 @@
 // Jasmine Sanders
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Library {
 
-    // PERSISTENT CLASS DEPENDENCY
-    private final DataPersistance _data;
-
     // GAMES LIST & GETTER
     private List<Game> games;
+
+    // PERSISTENT CLASS DEPENDENCY
+    private final DataPersistance _data;
 
     // DEPENDANCY INJECTION
     public Library(DataPersistance data) {
@@ -33,19 +34,25 @@ public class Library {
     }
 
     // ========================================================================
-    // CREATE METHODS, PARAMS & CLONE VIA OVERRIDE
-    public String addGame(
-            int id,
-            int year,
-            String title,
-            String platform,
-            Double price,
-            boolean isOwned,
-            String completion,
-            int rating,
-            List<String> tags
-    ) {
-        // CREATE NEW GAME OBJ AND ADD        
+    // ADD GAME 
+    public String addNewGame(Scanner scanner) {
+
+        // NOTE - WRAPPER FUNCTIONS LESS CODE, QUICKER TO WRITE, DEBUG, DON'T REPEAT YOURSELF, ETC...
+        int id = utils.readInt(scanner, "ID (integer): ");
+        String title = utils.readString(scanner, "Title: ");
+        int year = utils.readInt(scanner, "Year (4 digit integer): ");
+        String platform = utils.readString(scanner, "Platform: ");
+        double price = utils.readDouble(scanner, "Price $: ");
+        String owned_str = utils.readString(scanner, "Owned (Y/N): ");
+        String completion = utils.readString(scanner, "Completion: ");
+        int rating = utils.readInt(scanner, "Rating (0-100): ");
+        String tag_str = utils.readString(scanner, "Enter comma separated tags: ");
+
+        // PROCESS THE STR VALS, TAG_STR INTO LIST, OWNED_STR INTO BOOLEAN
+        var tag_list = new ArrayList<>(List.of(tag_str.trim().split("\\,")));
+        var isOwned = "Y".equals(owned_str);
+
+        // CREATE NEW GAME OBJ
         Game newGame = new Game(
                 id,
                 year,
@@ -55,23 +62,17 @@ public class Library {
                 isOwned,
                 completion,
                 rating,
-                tags
+                tag_list
         );
 
-        return addGame(newGame);
-    }
+        // ADD THE NEW GAME
+        games.add(newGame);
 
-    public String addGame(Game newGame) {
-
-        // TODO - TRY / CATCH TO ERROR GRACEFULLY
-        // ADD NEWGAME TO LIBRARY LIST IN MEMORY
-        this.games.add(newGame);
-
-        // SAVE TO DISK USING INJECTED CLASS
+        // SAVE GAMES TO PERSIST NEW GAME
         saveGames();
 
-        // RETURN MESG
-        return "Game \"" + newGame.getTitle() + "\" added to the library.";
+        // RETURN THE RESULT
+        return " + ADDED GAME[" + newGame.getTitle() + "]";
     }
 
     // =================================================================
@@ -92,14 +93,11 @@ public class Library {
             }
         }
 
-        // TRY GET GAME 
+        // TRY GET GAME BY MATCHING ID
         Game gameToEdit = null;
-        int gameIndex = -1;
-
         for (int i = 0; i < games.size(); i++) {
             if (games.get(i).getId() == gameId) {
                 gameToEdit = games.get(i);
-                gameIndex = i;
                 break;
             }
         }
@@ -157,9 +155,9 @@ public class Library {
 
         // INPUT ID FROM USER
         var getId = true;
-        var gameId = -1;
+        int gameId = -1;
 
-        while (getId) {
+        do {
             System.out.print("Enter the ID of the game to delete: ");
 
             try {
@@ -168,7 +166,7 @@ public class Library {
             } catch (NumberFormatException e) {
                 System.out.println("Invalid ID format. Please enter a valid number.");
             }
-        }
+        } while (getId);
 
         // TRY GET GAME 
         Game gameToDelete = null;

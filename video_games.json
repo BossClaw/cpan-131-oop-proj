@@ -115,20 +115,6 @@
     "completion": "Main Story"
   },
   {
-    "id": 18,
-    "price": 19.99,
-    "title": "BioShock",
-    "year": 2007,
-    "rating": 88,
-    "tags": [
-      "FPS",
-      "Story-Rich"
-    ],
-    "platform": "PC",
-    "isOwned": false,
-    "completion": "Main Story"
-  },
-  {
     "id": 16,
     "price": 19.99,
     "title": "Counter-Strike",
@@ -611,14 +597,14 @@
     "price": 19.99,
     "title": "Hoverboard Heroine",
     "year": 2022,
-    "rating": 91,
+    "rating": 99,
     "tags": [
       "Sports",
       "Dating Sim"
     ],
     "platform": "Arcade",
     "isOwned": true,
-    "completion": "NG+"
+    "completion": "NG++"
   },
   {
     "id": 783,
@@ -679,5 +665,33 @@
     "platform": "PC",
     "isOwned": true,
     "completion": "77%"
+  },
+  {
+    "id": 118,
+    "price": 39.99,
+    "title": "Crystal Caves",
+    "year": 1982,
+    "rating": 100,
+    "tags": [
+      "Adventure",
+      "Puzzle"
+    ],
+    "platform": "Artari 2600",
+    "isOwned": true,
+    "completion": "100%"
+  },
+  {
+    "id": 242,
+    "price": 567.99,
+    "title": "Crankey Pants",
+    "year": 3432,
+    "rating": 0,
+    "tags": [
+      "platformer",
+      "bananas"
+    ],
+    "platform": "SMITCH TOO",
+    "isOwned": false,
+    "completion": "0%"
   }
 ]

@@ -7,7 +7,6 @@ id,platform,year,title,price,isOwned,completion,rating,tags
 14,N64,1997,GoldenEye 007,19.99,true,Main Story,93,FPS;Multiplayer
 7,Xbox,2001,Halo: Combat Evolved,19.99,false,Main Story,97,FPS;Sci-Fi;Multiplayer
 6,PC,1998,Half-Life,19.99,true,Main Story,96,FPS;Sci-Fi;Story-Rich
-18,PC,2007,BioShock,19.99,false,Main Story,88,FPS;Story-Rich
 16,PC,2000,Counter-Strike,19.99,false,Main Story,86,FPS;Tactical
 781,PC,2014,Synthwave Saboteur,19.99,true,100%,73,Music
 782,PS1,1999,Neon Blitz,19.99,true,Level 3,95,Colour Matching; Puzzle
@@ -47,3 +46,4 @@ id,platform,year,title,price,isOwned,completion,rating,tags
 778,PS1,2010,Turbo Chess 3000,19.99,true,NG+,99,Strategy;Classic;Board Game
 792,NES,1992,Zombie Librarian,19.99,true,Level 1,85,Undead;Strategy;Dating Sim
 777,PC,2025,Brave Slimestronauts,2.1,true,77%,100,Space;Colour Matching;Retro;Indie
+118,Artari 2600,1982,Crystal Caves,39.99,true,100%,100,Adventure;Puzzle

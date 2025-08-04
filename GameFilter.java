@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 public class GameFilter {
 
     private Library library;
+    
     private final String color = "CYAN";
     private final String innerColor = "blue";
     private final String[] options = {
@@ -120,10 +121,11 @@ public class GameFilter {
         }
 
         // Find games
-        List<Game> games = new ArrayList<>(library.getAllGames());
+        List<Game> games = new ArrayList<>(library.getAllGames());        
         List<Game> filteredGames = games.stream()
                 .filter(game -> game.getTitle().toLowerCase().contains(input.toLowerCase()))
                 .collect(Collectors.toList());
+                
 
         // sort by id (ascending)
         sortHelper(filteredGames, "id", "a");
